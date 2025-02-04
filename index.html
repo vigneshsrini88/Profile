@@ -120,15 +120,15 @@
             <a href="#/" class="logo">Vignesh Srinivasan Profile</a>
         </div>
         <div class="search-wrapper">
-    <i class="fas fa-search"></i>
-    <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerSearch(event, 'global')">
-    <div id="global-search-results" class="search-results"></div>
-</div>
+            <i class="fas fa-search"></i>
+            <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerSearch(event, 'global')">
+            <div id="global-search-results" class="search-results"></div>
+        </div>
         <div class="nav-header-right">
-    <a href="experience.md">Experience</a>
-    <a href="documentation.md">Documentation</a>
-    <a href="https://www.linkedin.com/in/vignesh-srinivasan-45125111b/" target="_blank">LinkedIn</a>
-</div>
+            <a href="experience.md">Experience</a>
+            <a href="documentation.md">Documentation</a>
+            <a href="https://www.linkedin.com/in/vignesh-srinivasan-45125111b/" target="_blank">LinkedIn</a>
+        </div>
     </header>
     
     <div class="page-container">
@@ -162,59 +162,31 @@
     <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
-<script>
-    function triggerSearch(event) {
-        let query = event.target.value;
-        let searchInput = document.querySelector('.search input');
-        
-        if (searchInput) {
-            searchInput.value = query;
-            searchInput.dispatchEvent(new Event('input'));
-        }
-    }
-</script>
-<script>
-    function triggerSearch(event, searchType) {
-        let query = event.target.value;
-        
-        if (searchType === 'global') {
-            let globalResults = document.getElementById('global-search-results');
-            globalResults.innerHTML = ''; // Clear previous results
-            globalResults.style.display = query.length > 0 ? 'block' : 'none';
-
+    <script>
+        function triggerSearch(event, searchType) {
+            let query = event.target.value;
+            let resultsContainer = searchType === 'global' ? document.getElementById('global-search-results') : document.getElementById('sidebar-search-results');
+            
+            resultsContainer.innerHTML = ''; // Clear previous results
+            resultsContainer.style.display = query.length > 0 ? 'block' : 'none';
+            
             if (query.length > 0) {
                 let results = searchDocs(query);
                 results.forEach(result => {
                     let item = document.createElement('div');
                     item.innerHTML = `<a href="${result.link}">${result.title}</a>`;
-                    globalResults.appendChild(item);
+                    resultsContainer.appendChild(item);
                 });
             }
-        } else if (searchType === 'sidebar') {
-            let sidebarResults = document.querySelector('.search input');
-            if (sidebarResults) {
-                sidebarResults.value = query;
-                sidebarResults.dispatchEvent(new Event('input'));
-            }
         }
-    }
 
-    function searchDocs(query) {
-        let searchResults = [];
-        // Simulated search logic (Modify based on actual implementation)
-        let pages = [
-            { title: "Lead Technical Writer | Ushur Inc.", link: "experience.md" },
-            { title: "Key Expertise", link: "README.md#key-expertise" }
-        ];
-
-        pages.forEach(page => {
-            if (page.title.toLowerCase().includes(query.toLowerCase())) {
-                searchResults.push(page);
-            }
-        });
-
-        return searchResults;
-    }
-</script>
+        function searchDocs(query) {
+            let pages = [
+                { title: "Lead Technical Writer | Ushur Inc.", link: "experience.md" },
+                { title: "Key Expertise", link: "README.md#key-expertise" }
+            ];
+            return pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase()));
+        }
+    </script>
 </body>
 </html>
