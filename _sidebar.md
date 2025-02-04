@@ -1,16 +1,16 @@
 <!-- docs/_sidebar.md -->
 
-- **Home**
-  - [🏆 About Me](README.md)
-  - [💡 Expertise](expertise.md)
+- **🏠 Home**  
+  - [📜 About Me](README.md)  
+  - [💡 Key Expertise](expertise.md)  
 
-- **Professional Journey**
-  - [🏢 Experience](experience.md)
-  - [🏗 Projects](projects.md)
+- **📂 Professional Journey**  
+  - [🏢 Experience](experience.md)  
+  - [🚀 Projects](projects.md)  
 
-- **Resources**
-  - [🛠 Skills & Tools](skills.md)
-  - [📚 Certifications](certifications.md)
+- **🔧 Skills & Certifications**  
+  - [🛠 Skills](skills.md)  
+  - [📚 Certifications](certifications.md)  
 
-- **Connect**
-  - [📞 Contact](contact.md)
+- **📞 Connect**  
+  - [📬 Contact](contact.md)  

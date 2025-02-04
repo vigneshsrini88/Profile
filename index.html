@@ -38,31 +38,78 @@
 
         .search-wrapper {
             position: relative;
-            width: 40%;
-        }
-
-        .search-wrapper input {
-            width: 100%;
-            padding: 8px 35px;
-            border: none;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        /* Navigation Tabs */
-        .nav-tabs {
-            height: var(--tabs-height);
-            background: white;
-            border-bottom: 1px solid #eee;
+            width: 250px;
             display: flex;
             align-items: center;
-            padding: 0 20px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .search-wrapper i {
+            color: #666;
+            margin-right: 10px;
+        }
+
+        /* Right-Side Table of Contents */
+        .page_toc {
+            position: fixed;
+            right: 10px;
+            top: 100px;
+            width: var(--toc-width);
+            border-left: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+            font-size: 14px;
+        }
+
+        .toc-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .toc-content {
+            padding-left: 10px;
+        }
+
+        .toc-content a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 0;
+        }
+
+        .toc-content a:hover {
+            color: #3d1177;
+            text-decoration: underline;
+        }
+
+        /* Indent H3 Under H2 */
+        .toc-content a.toc-level-3 {
+            padding-left: 15px;
+            font-size: 13px;
+        }
+
+        /* Top Navigation Menu */
+        .nav-header-right {
+            display: flex;
+            gap: 20px;
+            padding-right: 20px;
+            align-items: center;
+        }
+
+        .nav-header-right a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Main Content */
         .content {
-            padding-top: calc(var(--navbar-height) + var(--tabs-height));
+            padding-top: var(--navbar-height);
         }
     </style>
 </head>
@@ -83,12 +130,13 @@
         </div>
     </header>
     
-    <nav class="nav-tabs">
-        <div class="nav-tab">Experience</div>
-        <div class="nav-tab">Documentation</div>
-    </nav>
-    
-    <div id="app"></div>
+    <div class="page-container">
+        <div id="app"></div>
+        <aside class="page_toc">
+            <div class="toc-title">On This Page</div>
+            <div class="toc-content"></div>
+        </aside>
+    </div>
     
     <script>
         window.$docsify = {
@@ -105,12 +153,13 @@
             },
             toc: {
                 scope: '.markdown-section',
-                headings: 'h2, h3, h4',
-                title: 'Table of contents',
+                headings: 'h2, h3',
+                title: 'On This Page',
             }
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
 </body>
 </html>
