@@ -1,321 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Vignesh Srinivasan Profile</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="Profile Page for Vignesh Srinivasan">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    
-    <!-- Themes -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/vue.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --theme-color: #3d1177;
-            --navbar-height: 60px;
-            --tabs-height: 40px;
-            --sidebar-width: 300px;
-            --toc-width: 250px;
-        }
+  <meta charset="UTF-8">
+  <title>Vignesh Srinivasan Profile</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Profile Page for Vignesh Srinivasan">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  
+  <!-- Themes -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/vue.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --theme-color: #3d1177;
+      --navbar-height: 60px;
+      --tabs-height: 40px;
+      --sidebar-width: 300px;
+      --toc-width: 250px;
+    }
 
-        /* Header */
-        .nav-header {
-            height: var(--navbar-height);
-            background-color: var(--theme-color);
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+    /* Header */
+    .nav-header {
+      height: var(--navbar-height);
+      background-color: var(--theme-color);
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
 
-        .nav-header a {
-            color: white;
-            text-decoration: none;
-        }
+    .nav-header a {
+      color: white;
+      text-decoration: none;
+    }
 
-        .search-wrapper {
-            position: relative;
-            width: 350px; /* Increased from 250px to 350px */
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            z-index: 1100;
-        }
+    .nav-header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-        .search-wrapper input {
-            width: 100%;
-            border: none;
-            padding: 5px 10px;
-            outline: none;
-            font-size: 14px;
-        }
+    .home-icon {
+      font-size: 20px;
+    }
 
-        .search-wrapper i {
-            color: #666;
-            margin-right: 10px;
-        }
+    .logo {
+      font-size: 18px;
+      font-weight: 500;
+    }
 
-        /* Search Results Styling */
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            border: 1px solid #ddd;
-            width: 100%;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 1200;
-            display: none;
-            padding: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            margin-top: 5px;
-        }
+    /* Search Wrapper */
+    .search-wrapper {
+      position: relative;
+      width: 350px; /* Increased width */
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      z-index: 1100;
+    }
 
-        .search-result-item {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-        }
+    .search-wrapper input {
+      width: 100%;
+      border: none;
+      padding: 5px 10px;
+      outline: none;
+      font-size: 14px;
+    }
 
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
+    .search-wrapper i {
+      color: #666;
+      margin-right: 10px;
+    }
 
-        .search-result-link {
-            color: #000; /* Changed from #333 to #000 for better contrast */
-            text-decoration: none;
-            display: block;
-        }
+    /* Updated Search Results Styling */
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid #ddd;
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 1200;
+      display: none;
+      padding: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      margin-top: 5px;
+    }
 
-        .search-result-link:hover {
-            background-color: #f5f5f5;
-        }
+    .search-result-item {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
 
-        .search-result-tag {
-            color: #666;
-            font-size: 12px;
-            margin-right: 8px;
-            text-transform: uppercase;
-        }
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
 
-        /* Right-Side Table of Contents */
-        .page_toc {
-            position: fixed;
-            right: 10px;
-            top: calc(var(--navbar-height) + 20px);
-            width: var(--toc-width);
-            border-left: 1px solid #ddd;
-            padding: 10px;
-            background: white;
-            font-size: 14px;
-            z-index: 999;
-        }
+    .search-result-link {
+      color: #2c3e50;  /* Darker text color for better contrast */
+      text-decoration: none;
+      display: block;
+    }
 
-        .toc-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+    .search-result-link:hover {
+      background-color: #f5f5f5;
+    }
 
-        .toc-content {
-            padding-left: 10px;
-        }
+    .search-result-tag {
+      color: #476582;  /* Darker color for the tag */
+      font-size: 12px;
+      margin-right: 8px;
+      text-transform: uppercase;
+      font-weight: 600;  /* Bold for better visibility */
+    }
 
-        .toc-content a {
-            display: block;
-            color: #333;
-            text-decoration: none;
-            padding: 5px 0;
-        }
+    /* Style for no results found message */
+    .search-result-item.no-results {
+      color: #2c3e50;
+      font-weight: 500;
+    }
 
-        .toc-content a:hover {
-            color: #3d1177;
-            text-decoration: underline;
-        }
+    /* Highlight style for matching text */
+    .search-match {
+      background-color: #e3f2fd;  /* Light blue background */
+      padding: 2px 0;
+    }
 
-        /* Indent H3 Under H2 */
-        .toc-content a.toc-level-3 {
-            padding-left: 15px;
-            font-size: 13px;
-        }
+    /* Right-Side Table of Contents */
+    .page_toc {
+      position: fixed;
+      right: 10px;
+      top: calc(var(--navbar-height) + 20px);
+      width: var(--toc-width);
+      border-left: 1px solid #ddd;
+      padding: 10px;
+      background: white;
+      font-size: 14px;
+      z-index: 999;
+    }
 
-        /* Top Navigation Menu */
-        .nav-header-right {
-            display: flex;
-            gap: 20px;
-            padding-right: 20px;
-            align-items: center;
-        }
+    .toc-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-        .nav-header-right a {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.1);
-        }
+    .toc-content {
+      padding-left: 10px;
+    }
 
-        .nav-header-right a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+    .toc-content a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      padding: 5px 0;
+    }
 
-        /* Main Content */
-        .content {
-            padding-top: calc(var(--navbar-height) + 20px);
-            margin-right: var(--toc-width);
-            padding-right: 20px;
-        }
+    .toc-content a:hover {
+      color: #3d1177;
+      text-decoration: underline;
+    }
 
-        /* Logo and Home Icon */
-        .nav-header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    /* Indent H3 Under H2 */
+    .toc-content a.toc-level-3 {
+      padding-left: 15px;
+      font-size: 13px;
+    }
 
-        .home-icon {
-            font-size: 20px;
-        }
+    /* Top Navigation Menu */
+    .nav-header-right {
+      display: flex;
+      gap: 20px;
+      padding-right: 20px;
+      align-items: center;
+    }
 
-        .logo {
-            font-size: 18px;
-            font-weight: 500;
-        }
-    </style>
+    .nav-header-right a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-header-right a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main Content */
+    .content {
+      padding-top: calc(var(--navbar-height) + 20px);
+      margin-right: var(--toc-width);
+      padding-right: 20px;
+    }
+  </style>
 </head>
 <body>
-    <header class="nav-header">
-        <div class="nav-header-left">
-            <a href="#/" class="home-icon"><i class="fas fa-home"></i></a>
-            <a href="#/" class="logo">Vignesh Srinivasan Profile</a>
-        </div>
-        <div class="search-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerGlobalSearch(event)">
-            <div id="global-search-results" class="search-results"></div>
-        </div>
-        <div class="nav-header-right">
-            <a href="#/experience">Experience</a>
-            <a href="#/documentation">Documentation</a>
-            <a href="https://www.linkedin.com/in/vignesh-srinivasan-45125111b/" target="_blank">LinkedIn</a>
-        </div>
-    </header>
-    
-    <div class="page-container">
-        <div id="app"></div>
-        <aside class="page_toc">
-            <div class="toc-title">On This Page</div>
-            <div class="toc-content"></div>
-        </aside>
+  <header class="nav-header">
+    <div class="nav-header-left">
+      <a href="#/" class="home-icon"><i class="fas fa-home"></i></a>
+      <a href="#/" class="logo">Vignesh Srinivasan Profile</a>
     </div>
-    
-    <!-- Docsify Configuration -->
-    <script>
-        window.$docsify = {
-            name: 'Profile',
-            repo: '',
-            loadSidebar: true,
-            subMaxLevel: 2,
-            auto2top: true,
-            search: {
-                paths: 'auto',
-                placeholder: 'Type to search',
-                noData: 'No results.',
-                depth: 6,
-            },
-            toc: {
-                scope: '.markdown-section',
-                headings: 'h2, h3',
-                title: 'On This Page',
-            }
-        };
-    </script>
+    <div class="search-wrapper">
+      <i class="fas fa-search"></i>
+      <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerGlobalSearch(event)">
+      <div id="global-search-results" class="search-results"></div>
+    </div>
+    <div class="nav-header-right">
+      <a href="#/experience">Experience</a>
+      <a href="#/documentation">Documentation</a>
+      <a href="https://www.linkedin.com/in/vignesh-srinivasan-45125111b/" target="_blank">LinkedIn</a>
+    </div>
+  </header>
+  
+  <div class="page-container">
+    <div id="app"></div>
+    <aside class="page_toc">
+      <div class="toc-title">On This Page</div>
+      <div class="toc-content"></div>
+    </aside>
+  </div>
+  
+  <!-- Docsify Configuration -->
+  <script>
+    window.$docsify = {
+      name: 'Profile',
+      repo: '',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      search: {
+        paths: 'auto',
+        placeholder: 'Type to search',
+        noData: 'No results.',
+        depth: 6,
+      },
+      toc: {
+        scope: '.markdown-section',
+        headings: 'h2, h3',
+        title: 'On This Page',
+      }
+    };
+  </script>
 
-    <!-- Required Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
+  <!-- Required Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
 
-    <!-- Global Search Implementation -->
-    <script>
-        function triggerGlobalSearch(event) {
-            const searchTerm = event.target.value.toLowerCase();
-            const searchResults = document.getElementById('global-search-results');
-            
-            // Don't search if input is empty
-            if (!searchTerm) {
-                searchResults.style.display = 'none';
-                return;
-            }
+  <!-- Global Search Implementation -->
+  <script>
+    function triggerGlobalSearch(event) {
+      const searchTerm = event.target.value.toLowerCase();
+      const searchResults = document.getElementById('global-search-results');
 
-            // Get all the content from the main content area
-            const content = document.querySelector('.markdown-section');
-            if (!content) {
-                searchResults.innerHTML = '<div class="search-result-item">Loading content...</div>';
-                searchResults.style.display = 'block';
-                return;
-            }
+      // Don't search if input is empty
+      if (!searchTerm) {
+        searchResults.style.display = 'none';
+        return;
+      }
 
-            // Find all headings and paragraphs
-            const elements = content.querySelectorAll('h1, h2, h3, h4, h5, h6, p');
-            const matches = [];
+      // Get all the content from the main content area
+      const content = document.querySelector('.markdown-section');
+      if (!content) {
+        searchResults.innerHTML = '<div class="search-result-item no-results">Loading content...</div>';
+        searchResults.style.display = 'block';
+        return;
+      }
 
-            elements.forEach(element => {
-                const text = element.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    // Get the first 100 characters of text for context
-                    let previewText = element.textContent;
-                    if (previewText.length > 100) {
-                        previewText = previewText.substring(0, 100) + '...';
-                    }
+      // Find all headings and paragraphs
+      const elements = content.querySelectorAll('h1, h2, h3, h4, h5, h6, p');
+      const matches = [];
 
-                    matches.push({
-                        text: previewText,
-                        tag: element.tagName.toLowerCase(),
-                        href: `#${element.id || ''}`
-                    });
-                }
-            });
+      elements.forEach(element => {
+        const text = element.textContent;
+        const lowerText = text.toLowerCase();
+        if (lowerText.includes(searchTerm)) {
+          // Get the context around the match
+          const index = lowerText.indexOf(searchTerm);
+          let previewText = text;
+          if (text.length > 100) {
+            const start = Math.max(0, index - 40);
+            const end = Math.min(text.length, index + 60);
+            previewText = (start > 0 ? '...' : '') +
+                          text.slice(start, end) +
+                          (end < text.length ? '...' : '');
+          }
 
-            // Display results
-            if (matches.length > 0) {
-                searchResults.innerHTML = matches.map(match => `
-                    <div class="search-result-item">
-                        <a href="${match.href}" class="search-result-link">
-                            <span class="search-result-tag">${match.tag}</span>
-                            ${match.text}
-                        </a>
-                    </div>
-                `).join('');
-                searchResults.style.display = 'block';
-            } else {
-                searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
-                searchResults.style.display = 'block';
-            }
+          // Highlight the matching text
+          const highlightedText = previewText.replace(
+            new RegExp(searchTerm, 'gi'),
+            match => `<span class="search-match">${match}</span>`
+          );
+
+          matches.push({
+            text: highlightedText,
+            tag: element.tagName.toLowerCase(),
+            href: `#${element.id || ''}`
+          });
         }
+      });
 
-        // Close search results when clicking outside
-        document.addEventListener('click', function(e) {
-            const searchResults = document.getElementById('global-search-results');
-            if (!e.target.closest('.search-wrapper') && searchResults) {
-                searchResults.style.display = 'none';
-            }
-        });
+      // Display results
+      if (matches.length > 0) {
+        searchResults.innerHTML = matches.map(match => `
+          <div class="search-result-item">
+            <a href="${match.href}" class="search-result-link">
+              <span class="search-result-tag">${match.tag}</span>
+              <span>${match.text}</span>
+            </a>
+          </div>
+        `).join('');
+        searchResults.style.display = 'block';
+      } else {
+        searchResults.innerHTML = '<div class="search-result-item no-results">No results found</div>';
+        searchResults.style.display = 'block';
+      }
+    }
 
-        // Prevent clicks within search results from closing the dropdown
-        document.getElementById('global-search-results')?.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    </script>
+    // Close search results when clicking outside
+    document.addEventListener('click', function(e) {
+      const searchResults = document.getElementById('global-search-results');
+      if (!e.target.closest('.search-wrapper') && searchResults) {
+        searchResults.style.display = 'none';
+      }
+    });
+
+    // Prevent clicks within search results from closing the dropdown
+    document.getElementById('global-search-results')?.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  </script>
 </body>
 </html>
