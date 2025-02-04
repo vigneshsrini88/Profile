@@ -181,7 +181,7 @@
     </div>
     <div class="search-wrapper">
       <i class="fas fa-search"></i>
-      <!-- Use the IDs expected by Docsify's search plugin -->
+      <!-- Use the default IDs Docsify search plugin expects -->
       <input type="text" id="search-input" placeholder="Search...">
       <div id="search-results"></div>
     </div>
@@ -209,17 +209,28 @@
       subMaxLevel: 2,
       auto2top: true,
       search: {
-        paths: 'auto', // Auto-fetches pages listed in your sidebar
+        paths: 'auto', // Automatically fetches pages from your sidebar
         placeholder: 'Type to search',
         noData: 'No results.',
         depth: 6
       },
+      // Change the scope if needed. If your content isn’t wrapped in .markdown-section on all pages,
+      // try using '#app' instead.
       toc: {
         scope: '.markdown-section',
         headings: 'h2, h3',
         title: 'On This Page'
       }
     };
+
+    // Re-run the TOC generation on each page change
+    window.$docsify.plugins.push((hook, vm) => {
+      hook.doneEach(function() {
+        if (window.$docsify.toc) {
+          window.$docsify.toc();
+        }
+      });
+    });
   </script>
   
   <!-- Required Scripts -->
