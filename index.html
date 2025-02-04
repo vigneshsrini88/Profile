@@ -166,21 +166,27 @@
     </div>
     
     <script>
-        function triggerGlobalSearch(event) {
-            let query = event.target.value;
-            let resultsContainer = document.getElementById('global-search-results');
-            resultsContainer.innerHTML = '';
-            resultsContainer.style.display = query.length > 0 ? 'block' : 'none';
-
-            fetch('search-index.json').then(response => response.json()).then(pages => {
-                let results = pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase()));
-                results.forEach(result => {
-                    let item = document.createElement('div');
-                    item.innerHTML = `<a href="${result.link}">${result.title}</a>`;
-                    resultsContainer.appendChild(item);
-                });
-            });
-        }
+        window.$docsify = {
+            name: 'Profile',
+            repo: '',
+            loadSidebar: true,
+            subMaxLevel: 2,
+            auto2top: true,
+            search: {
+                paths: 'auto',
+                placeholder: 'Type to search',
+                noData: 'No results.',
+                depth: 6,
+            },
+            toc: {
+                scope: '.markdown-section',
+                headings: 'h2, h3',
+                title: 'On This Page',
+            }
+        };
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
 </body>
 </html>
