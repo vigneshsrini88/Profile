@@ -58,7 +58,7 @@
     /* Search Wrapper */
     .search-wrapper {
       position: relative;
-      width: 350px; /* Increased width */
+      width: 350px; /* Extended search bar width */
       display: flex;
       align-items: center;
       background: white;
@@ -101,40 +101,39 @@
     .search-result-item {
       padding: 8px;
       border-bottom: 1px solid #eee;
-    }
-
-    .search-result-item:last-child {
-      border-bottom: none;
+      color: #333333; /* Much darker base text color */
     }
 
     .search-result-link {
-      color: #2c3e50;  /* Darker text color for better contrast */
+      color: #333333; /* Ensuring link text is also dark */
       text-decoration: none;
       display: block;
     }
 
-    .search-result-link:hover {
-      background-color: #f5f5f5;
-    }
-
     .search-result-tag {
-      color: #476582;  /* Darker color for the tag */
+      color: #333333; /* Making tags clearly visible */
       font-size: 12px;
       margin-right: 8px;
       text-transform: uppercase;
-      font-weight: 600;  /* Bold for better visibility */
-    }
-
-    /* Style for no results found message */
-    .search-result-item.no-results {
-      color: #2c3e50;
       font-weight: 500;
     }
 
-    /* Highlight style for matching text */
-    .search-match {
-      background-color: #e3f2fd;  /* Light blue background */
-      padding: 2px 0;
+    .search-result-link:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* For selected/highlighted state */
+    .search-result-item.selected,
+    .search-result-item:hover {
+      background-color: #4285f4;
+      color: white;
+    }
+
+    .search-result-item.selected .search-result-link,
+    .search-result-item:hover .search-result-link,
+    .search-result-item.selected .search-result-tag,
+    .search-result-item:hover .search-result-tag {
+      color: white;
     }
 
     /* Right-Side Table of Contents */
@@ -264,7 +263,7 @@
     function triggerGlobalSearch(event) {
       const searchTerm = event.target.value.toLowerCase();
       const searchResults = document.getElementById('global-search-results');
-
+      
       // Don't search if input is empty
       if (!searchTerm) {
         searchResults.style.display = 'none';
@@ -274,7 +273,7 @@
       // Get all the content from the main content area
       const content = document.querySelector('.markdown-section');
       if (!content) {
-        searchResults.innerHTML = '<div class="search-result-item no-results">Loading content...</div>';
+        searchResults.innerHTML = '<div class="search-result-item">Loading content...</div>';
         searchResults.style.display = 'block';
         return;
       }
@@ -284,29 +283,16 @@
       const matches = [];
 
       elements.forEach(element => {
-        const text = element.textContent;
-        const lowerText = text.toLowerCase();
-        if (lowerText.includes(searchTerm)) {
-          // Get the context around the match
-          const index = lowerText.indexOf(searchTerm);
-          let previewText = text;
-          if (text.length > 100) {
-            const start = Math.max(0, index - 40);
-            const end = Math.min(text.length, index + 60);
-            previewText = (start > 0 ? '...' : '') +
-                          text.slice(start, end) +
-                          (end < text.length ? '...' : '');
+        const text = element.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          // Get the first 100 characters of text for context
+          let previewText = element.textContent;
+          if (previewText.length > 100) {
+            previewText = previewText.substring(0, 100) + '...';
           }
 
-          // Highlight the matching text
-          const highlightedText = previewText.replace(
-            new RegExp(searchTerm, 'gi'),
-            match => `<span class="search-match">${match}</span>`
-          );
-
           matches.push({
-            text: highlightedText,
-            tag: element.tagName.toLowerCase(),
+            text: previewText,
             href: `#${element.id || ''}`
           });
         }
@@ -317,14 +303,13 @@
         searchResults.innerHTML = matches.map(match => `
           <div class="search-result-item">
             <a href="${match.href}" class="search-result-link">
-              <span class="search-result-tag">${match.tag}</span>
-              <span>${match.text}</span>
+              ${match.text}
             </a>
           </div>
         `).join('');
         searchResults.style.display = 'block';
       } else {
-        searchResults.innerHTML = '<div class="search-result-item no-results">No results found</div>';
+        searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
         searchResults.style.display = 'block';
       }
     }
