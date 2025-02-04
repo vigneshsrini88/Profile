@@ -181,7 +181,8 @@
     </div>
     <div class="search-wrapper">
       <i class="fas fa-search"></i>
-      <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerGlobalSearch(event)">
+      <!-- Remove custom onkeyup attribute so Docsify's search plugin is used -->
+      <input type="text" id="global-search" placeholder="Search...">
       <div id="global-search-results" class="search-results"></div>
     </div>
     <div class="nav-header-right">
@@ -220,94 +221,12 @@
       }
     };
   </script>
-
+  
   <!-- Required Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
-
-  <!-- Global Search Implementation -->
-  <script>
-    function triggerGlobalSearch(event) {
-      const searchTerm = event.target.value.toLowerCase();
-      const searchResults = document.getElementById('global-search-results');
-
-      // Don't search if input is empty
-      if (!searchTerm) {
-        searchResults.style.display = 'none';
-        return;
-      }
-
-      // Get all the content from the main content area
-      const content = document.querySelector('.markdown-section');
-      if (!content) {
-        searchResults.innerHTML = '<div class="search-result-item no-results">Loading content...</div>';
-        searchResults.style.display = 'block';
-        return;
-      }
-
-      // Find all headings and paragraphs
-      const elements = content.querySelectorAll('h1, h2, h3, h4, h5, h6, p');
-      const matches = [];
-
-      elements.forEach(element => {
-        const text = element.textContent;
-        const lowerText = text.toLowerCase();
-        if (lowerText.includes(searchTerm)) {
-          // Get the context around the match
-          const index = lowerText.indexOf(searchTerm);
-          let previewText = text;
-          if (text.length > 100) {
-            const start = Math.max(0, index - 40);
-            const end = Math.min(text.length, index + 60);
-            previewText = (start > 0 ? '...' : '') +
-                          text.slice(start, end) +
-                          (end < text.length ? '...' : '');
-          }
-
-          // Highlight the matching text
-          const highlightedText = previewText.replace(
-            new RegExp(searchTerm, 'gi'),
-            match => `<span class="search-match">${match}</span>`
-          );
-
-          matches.push({
-            text: highlightedText,
-            tag: element.tagName.toLowerCase(),
-            href: `#${element.id || ''}`
-          });
-        }
-      });
-
-      // Display results
-      if (matches.length > 0) {
-        searchResults.innerHTML = matches.map(match => `
-          <div class="search-result-item">
-            <a href="${match.href}" class="search-result-link">
-              <span class="search-result-tag">${match.tag}</span>
-              <span>${match.text}</span>
-            </a>
-          </div>
-        `).join('');
-        searchResults.style.display = 'block';
-      } else {
-        searchResults.innerHTML = '<div class="search-result-item no-results">No results found</div>';
-        searchResults.style.display = 'block';
-      }
-    }
-
-    // Close search results when clicking outside
-    document.addEventListener('click', function(e) {
-      const searchResults = document.getElementById('global-search-results');
-      if (!e.target.closest('.search-wrapper') && searchResults) {
-        searchResults.style.display = 'none';
-      }
-    });
-
-    // Prevent clicks within search results from closing the dropdown
-    document.getElementById('global-search-results')?.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-  </script>
+  
+  <!-- Custom search script removed so that Docsify's built-in search plugin handles the search -->
 </body>
 </html>
