@@ -47,6 +47,14 @@
             z-index: 1100;
         }
 
+        .search-wrapper input {
+            width: 100%;
+            border: none;
+            padding: 5px 10px;
+            outline: none;
+            font-size: 14px;
+        }
+
         .search-wrapper i {
             color: #666;
             margin-right: 10px;
@@ -55,14 +63,17 @@
         /* Search Results Styling */
         .search-results {
             position: absolute;
+            top: 100%;
+            left: 0;
             background: white;
             border: 1px solid #ddd;
-            width: 250px;
+            width: 100%;
             max-height: 300px;
             overflow-y: auto;
             z-index: 1200;
             display: none;
             padding: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         /* Right-Side Table of Contents */
@@ -154,29 +165,6 @@
         </aside>
     </div>
     
-    <script>
-        window.$docsify = {
-            name: 'Profile',
-            repo: '',
-            loadSidebar: true,
-            subMaxLevel: 2,
-            auto2top: true,
-            search: {
-                paths: 'auto',
-                placeholder: 'Type to search',
-                noData: 'No results.',
-                depth: 6,
-            },
-            toc: {
-                scope: '.markdown-section',
-                headings: 'h2, h3',
-                title: 'On This Page',
-            }
-        };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
     <script>
         function triggerGlobalSearch(event) {
             let query = event.target.value;
