@@ -2,7 +2,6 @@
 
 - **🏠 Home**  
   - [📜 About Me](README.md)  
-  - [💡 Key Expertise](expertise.md)  
 
 - **📂 Professional Journey**  
   - [🏢 Experience](experience.md)  

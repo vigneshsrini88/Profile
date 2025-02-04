@@ -37,11 +37,3 @@
 📌 **Technical Writer | Benefitalign** (2016-2017)  
 📌 **Technical Author | Lionbridge Technologies** (2013-2016)  
 📌 **Aircraft Maintenance Technician | Aerospace Industry** (2009-2012)  
-
----
-
-### **📌 Next Steps**
-1️⃣ **Review & confirm this Experience section**.  
-2️⃣ Once approved, we’ll move to **Projects (`projects.md`)**.  
-
-Let me know if you'd like **any tweaks or refinements!** 🚀
