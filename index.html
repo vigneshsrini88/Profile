@@ -136,7 +136,7 @@
         </div>
         <div class="search-wrapper">
             <i class="fas fa-search"></i>
-            <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerSearch(event, 'global')">
+            <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerGlobalSearch(event)">
             <div id="global-search-results" class="search-results"></div>
         </div>
         <div class="nav-header-right">
@@ -178,14 +178,10 @@
     <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
     <script>
-        async function fetchSearchIndex() {
-            const response = await fetch('search-index.json');
-            return response.ok ? response.json() : [];
-        }
-
-        async function searchDocs(query) {
-            let pages = await fetchSearchIndex();
-            return pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase()));
+        function triggerGlobalSearch(event) {
+            let query = event.target.value;
+            document.querySelector('.search input').value = query;
+            document.querySelector('.search input').dispatchEvent(new Event('input'));
         }
     </script>
 </body>
