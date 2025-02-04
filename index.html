@@ -180,8 +180,18 @@
     <script>
         function triggerGlobalSearch(event) {
             let query = event.target.value;
-            document.querySelector('.search input').value = query;
-            document.querySelector('.search input').dispatchEvent(new Event('input'));
+            let resultsContainer = document.getElementById('global-search-results');
+            resultsContainer.innerHTML = '';
+            resultsContainer.style.display = query.length > 0 ? 'block' : 'none';
+
+            fetch('search-index.json').then(response => response.json()).then(pages => {
+                let results = pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase()));
+                results.forEach(result => {
+                    let item = document.createElement('div');
+                    item.innerHTML = `<a href="${result.link}">${result.title}</a>`;
+                    resultsContainer.appendChild(item);
+                });
+            });
         }
     </script>
 </body>
