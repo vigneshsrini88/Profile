@@ -29,6 +29,10 @@
             align-items: center;
             justify-content: space-between;
             color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
         .nav-header a {
@@ -74,19 +78,47 @@
             display: none;
             padding: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .search-result-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-link {
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+
+        .search-result-link:hover {
+            background-color: #f5f5f5;
+        }
+
+        .search-result-tag {
+            color: #666;
+            font-size: 12px;
+            margin-right: 8px;
+            text-transform: uppercase;
         }
 
         /* Right-Side Table of Contents */
         .page_toc {
             position: fixed;
             right: 10px;
-            top: 100px;
+            top: calc(var(--navbar-height) + 20px);
             width: var(--toc-width);
             border-left: 1px solid #ddd;
             padding: 10px;
             background: white;
             font-size: 14px;
-            z-index: 1000;
+            z-index: 999;
         }
 
         .toc-title {
@@ -133,9 +165,31 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
+        .nav-header-right a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         /* Main Content */
         .content {
-            padding-top: var(--navbar-height);
+            padding-top: calc(var(--navbar-height) + 20px);
+            margin-right: var(--toc-width);
+            padding-right: 20px;
+        }
+
+        /* Logo and Home Icon */
+        .nav-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .home-icon {
+            font-size: 20px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -151,8 +205,8 @@
             <div id="global-search-results" class="search-results"></div>
         </div>
         <div class="nav-header-right">
-            <a href="experience.md">Experience</a>
-            <a href="documentation.md">Documentation</a>
+            <a href="#/experience">Experience</a>
+            <a href="#/documentation">Documentation</a>
             <a href="https://www.linkedin.com/in/vignesh-srinivasan-45125111b/" target="_blank">LinkedIn</a>
         </div>
     </header>
@@ -165,6 +219,7 @@
         </aside>
     </div>
     
+    <!-- Docsify Configuration -->
     <script>
         window.$docsify = {
             name: 'Profile',
@@ -185,8 +240,82 @@
             }
         };
     </script>
+
+    <!-- Required Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
+
+    <!-- Global Search Implementation -->
+    <script>
+        function triggerGlobalSearch(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const searchResults = document.getElementById('global-search-results');
+            
+            // Don't search if input is empty
+            if (!searchTerm) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            // Get all the content from the main content area
+            const content = document.querySelector('.markdown-section');
+            if (!content) {
+                searchResults.innerHTML = '<div class="search-result-item">Loading content...</div>';
+                searchResults.style.display = 'block';
+                return;
+            }
+
+            // Find all headings and paragraphs
+            const elements = content.querySelectorAll('h1, h2, h3, h4, h5, h6, p');
+            const matches = [];
+
+            elements.forEach(element => {
+                const text = element.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    // Get the first 100 characters of text for context
+                    let previewText = element.textContent;
+                    if (previewText.length > 100) {
+                        previewText = previewText.substring(0, 100) + '...';
+                    }
+
+                    matches.push({
+                        text: previewText,
+                        tag: element.tagName.toLowerCase(),
+                        href: `#${element.id || ''}`
+                    });
+                }
+            });
+
+            // Display results
+            if (matches.length > 0) {
+                searchResults.innerHTML = matches.map(match => `
+                    <div class="search-result-item">
+                        <a href="${match.href}" class="search-result-link">
+                            <span class="search-result-tag">${match.tag}</span>
+                            ${match.text}
+                        </a>
+                    </div>
+                `).join('');
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                searchResults.style.display = 'block';
+            }
+        }
+
+        // Close search results when clicking outside
+        document.addEventListener('click', function(e) {
+            const searchResults = document.getElementById('global-search-results');
+            if (!e.target.closest('.search-wrapper') && searchResults) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Prevent clicks within search results from closing the dropdown
+        document.getElementById('global-search-results')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
 </body>
 </html>
