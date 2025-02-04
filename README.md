@@ -1,27 +1,22 @@
-# Welcome to My Profile 🚀
-📅 Updated on **{date}**  
-⏳ _1-minute read_  
-👥 **Contributors:** [Your Name]
+# 🚀 Vignesh Srinivasan - Lead Technical Writer  
+📍 Bengaluru, India  
+✉️ [vigneshsrini.88@gmail.com](mailto:vigneshsrini.88@gmail.com)  
+🔗 [LinkedIn](https://www.linkedin.com/in/vignesh-srinivasan-45125111b/) | [GitHub](https://github.com/vigneshsrini88)  
 
-## 🏆 About Me
-Hello! I'm **Your Name**, a **Senior Technical Writer & Product Support Engineer** passionate about APIs, Web Technologies, and Documentation.
+## 🏆 About Me  
+I am a **Lead Technical Writer** with over **13+ years** of experience in **Technical Documentation, API Writing, and Project Management**.  
+I specialize in crafting **clear, structured, and engaging content** for **enterprise software, SaaS, AI, cloud technologies, and developer tools**.
 
-## 🚀 Experience
-- **Senior Technical Writer at Ushur**
-- **Technical Program Manager at VMware**
-- **Messaging Engineer at Twilio**
-- **Tech Lead at HP, TCS, & Broadcom**
+## 💡 Key Expertise  
+✔️ **Technical Documentation:** API, CLI, SDK, Developer Docs, Admin & Troubleshooting Guides  
+✔️ **Content Strategy:** SEO-optimized, structured writing, user-focused documentation  
+✔️ **API & SaaS Writing:** Deep experience in RESTful APIs, OAuth, Postman, Swagger, and integrations  
+✔️ **Project & Team Management:** Leading documentation teams, mentoring writers, Agile & Scrum  
+✔️ **Docs-as-Code & CMS:** Proficient in Docsify, Markdown, DITA, Document360, GitHub  
+✔️ **Multimedia & Interactive Docs:** Infographics, Camtasia, video tutorials, AI-generated content  
+✔️ **Industry Experience:** SaaS, AI, Cloud, Healthcare, HVAC, Networking, Telecommunications, Aerospace  
 
-## 📚 Skills
-🔹 APIs & Web Troubleshooting  
-🔹 REST Calls, OAuth, Active Directory  
-🔹 MySQL, Postman, and more  
-
-## 💡 Projects
-- **Project A**: Brief description
-- **Project B**: Brief description
-
-## 📞 Contact Me
-📧 Email: [your-email@example.com](mailto:your-email@example.com)  
-🔗 [LinkedIn](https://linkedin.com/in/yourprofile)  
-📜 [GitHub](https://github.com/yourprofile)
+🔹 **Explore More:**  
+📄 **[Experience](experience.md)** - My career journey  
+🏗 **[Projects](projects.md)** - Notable contributions  
+📞 **[Contact](contact.md)** - Let's connect!  
