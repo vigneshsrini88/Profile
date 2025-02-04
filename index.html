@@ -120,14 +120,14 @@
             <a href="#/" class="logo">Vignesh Srinivasan Profile</a>
         </div>
         <div class="search-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search">
-        </div>
+    <i class="fas fa-search"></i>
+    <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerSearch(event)">
+</div>
         <div class="nav-header-right">
-            <a href="#">Experience</a>
-            <a href="#">Documentation</a>
-            <a href="#">LinkedIn</a>
-        </div>
+    <a href="experience.md">Experience</a>
+    <a href="documentation.md">Documentation</a>
+    <a href="https://www.linkedin.com/in/vignesh-srinivasan-45125111b/" target="_blank">LinkedIn</a>
+</div>
     </header>
     
     <div class="page-container">
@@ -161,5 +161,16 @@
     <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
+<script>
+    function triggerSearch(event) {
+        let query = event.target.value;
+        let searchInput = document.querySelector('.search input');
+        
+        if (searchInput) {
+            searchInput.value = query;
+            searchInput.dispatchEvent(new Event('input'));
+        }
+    }
+</script>
 </body>
 </html>
