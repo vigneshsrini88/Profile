@@ -34,22 +34,18 @@
       top: 0;
       z-index: 1000;
     }
-
     .nav-header a {
       color: white;
       text-decoration: none;
     }
-
     .nav-header-left {
       display: flex;
       align-items: center;
       gap: 15px;
     }
-
     .home-icon {
       font-size: 20px;
     }
-
     .logo {
       font-size: 18px;
       font-weight: 500;
@@ -66,7 +62,6 @@
       border-radius: 20px;
       z-index: 1100;
     }
-
     .search-wrapper input {
       width: 100%;
       border: none;
@@ -74,52 +69,47 @@
       outline: none;
       font-size: 14px;
     }
-
     .search-wrapper i {
       color: #666;
       margin-right: 10px;
     }
 
-    /* Updated Search Results Styling */
-    .search-results {
+    /* Updated Search Results Styling with increased specificity */
+    body .search-results {
       position: absolute;
       top: 100%;
       left: 0;
-      background: white;
-      border: 1px solid #ddd;
+      background: white !important;
+      border: 1px solid #ddd !important;
       width: 100%;
       max-height: 300px;
       overflow-y: auto;
       z-index: 1200;
       display: none;
       padding: 5px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
       border-radius: 4px;
       margin-top: 5px;
     }
-
-    .search-result-item {
+    body .search-result-item {
       padding: 8px;
-      border-bottom: 1px solid #eee;
-      color: #000000;  /* Changed to pure black */
+      border-bottom: 1px solid #eee !important;
+      color: #000000 !important;  /* Pure black text */
     }
-
-    .search-result-link {
-      color: #000000;  /* Changed to pure black */
+    body .search-result-link {
+      color: #000000 !important;  /* Pure black text */
       text-decoration: none;
       display: block;
     }
-
     /* For selected/highlighted state */
-    .search-result-item.selected,
-    .search-result-item:hover {
-      background-color: #4285f4;
-      color: white;
+    body .search-result-item.selected,
+    body .search-result-item:hover {
+      background-color: #4285f4 !important;
+      color: white !important;
     }
-
-    .search-result-link:hover,
-    .search-result-item:hover .search-result-link {
-      color: white;  /* White text on blue background when selected */
+    body .search-result-link:hover,
+    body .search-result-item:hover .search-result-link {
+      color: white !important;
     }
 
     /* Right-Side Table of Contents */
@@ -134,29 +124,23 @@
       font-size: 14px;
       z-index: 999;
     }
-
     .toc-title {
       font-weight: bold;
       margin-bottom: 10px;
     }
-
     .toc-content {
       padding-left: 10px;
     }
-
     .toc-content a {
       display: block;
       color: #333;
       text-decoration: none;
       padding: 5px 0;
     }
-
     .toc-content a:hover {
       color: #3d1177;
       text-decoration: underline;
     }
-
-    /* Indent H3 Under H2 */
     .toc-content a.toc-level-3 {
       padding-left: 15px;
       font-size: 13px;
@@ -169,7 +153,6 @@
       padding-right: 20px;
       align-items: center;
     }
-
     .nav-header-right a {
       color: white;
       text-decoration: none;
@@ -178,7 +161,6 @@
       border-radius: 4px;
       background: rgba(255, 255, 255, 0.1);
     }
-
     .nav-header-right a:hover {
       background: rgba(255, 255, 255, 0.2);
     }
