@@ -44,11 +44,25 @@
             background: white;
             padding: 5px 10px;
             border-radius: 20px;
+            z-index: 1100;
         }
 
         .search-wrapper i {
             color: #666;
             margin-right: 10px;
+        }
+
+        /* Search Results Styling */
+        .search-results {
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            width: 250px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1200;
+            display: none;
+            padding: 5px;
         }
 
         /* Right-Side Table of Contents */
@@ -61,6 +75,7 @@
             padding: 10px;
             background: white;
             font-size: 14px;
+            z-index: 1000;
         }
 
         .toc-title {
@@ -122,7 +137,7 @@
         <div class="search-wrapper">
             <i class="fas fa-search"></i>
             <input type="text" id="global-search" placeholder="Search..." onkeyup="triggerSearch(event, 'global')">
-            <div id="global-search-results" class="search-results" style="position: absolute; background: white; border: 1px solid #ddd; width: 250px; max-height: 200px; overflow-y: auto; z-index: 1000; display: none; padding: 5px;"></div>
+            <div id="global-search-results" class="search-results"></div>
         </div>
         <div class="nav-header-right">
             <a href="experience.md">Experience</a>
@@ -163,28 +178,13 @@
     <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-toc@1.0.0/dist/toc.js"></script>
     <script>
-        function triggerSearch(event, searchType) {
-            let query = event.target.value;
-            let resultsContainer = searchType === 'global' ? document.getElementById('global-search-results') : document.getElementById('sidebar-search-results');
-            
-            resultsContainer.innerHTML = ''; // Clear previous results
-            resultsContainer.style.display = query.length > 0 ? 'block' : 'none';
-            
-            if (query.length > 0) {
-                let results = searchDocs(query);
-                results.forEach(result => {
-                    let item = document.createElement('div');
-                    item.innerHTML = `<a href="${result.link}">${result.title}</a>`;
-                    resultsContainer.appendChild(item);
-                });
-            }
+        async function fetchSearchIndex() {
+            const response = await fetch('search-index.json');
+            return response.ok ? response.json() : [];
         }
 
-        function searchDocs(query) {
-            let pages = [
-                { title: "Lead Technical Writer | Ushur Inc.", link: "experience.md" },
-                { title: "Key Expertise", link: "README.md#key-expertise" }
-            ];
+        async function searchDocs(query) {
+            let pages = await fetchSearchIndex();
             return pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase()));
         }
     </script>
