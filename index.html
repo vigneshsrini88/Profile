@@ -19,7 +19,7 @@
       --sidebar-width: 300px;
       --toc-width: 250px;
     }
-
+    
     /* Header */
     .nav-header {
       height: var(--navbar-height);
@@ -50,7 +50,7 @@
       font-size: 18px;
       font-weight: 500;
     }
-
+    
     /* Search Wrapper */
     .search-wrapper {
       position: relative;
@@ -73,7 +73,7 @@
       color: #666;
       margin-right: 10px;
     }
-
+    
     /* Docsify Search Plugin Styling Overrides */
     body #search-results {
       position: absolute;
@@ -111,7 +111,7 @@
     body .search-result-item:hover .search-result-link {
       color: white !important;
     }
-
+    
     /* Right-Side Table of Contents */
     .page_toc {
       position: fixed;
@@ -145,7 +145,7 @@
       padding-left: 15px;
       font-size: 13px;
     }
-
+    
     /* Top Navigation Menu */
     .nav-header-right {
       display: flex;
@@ -164,7 +164,7 @@
     .nav-header-right a:hover {
       background: rgba(255, 255, 255, 0.2);
     }
-
+    
     /* Main Content */
     .content {
       padding-top: calc(var(--navbar-height) + 20px);
@@ -181,7 +181,7 @@
     </div>
     <div class="search-wrapper">
       <i class="fas fa-search"></i>
-      <!-- Use the default IDs Docsify search plugin expects -->
+      <!-- Use the default IDs expected by Docsify's search plugin -->
       <input type="text" id="search-input" placeholder="Search...">
       <div id="search-results"></div>
     </div>
@@ -209,13 +209,13 @@
       subMaxLevel: 2,
       auto2top: true,
       search: {
-        paths: 'auto', // Automatically fetches pages from your sidebar
+        paths: 'auto', // Automatically fetch and index pages from your sidebar
         placeholder: 'Type to search',
         noData: 'No results.',
         depth: 6
       },
-      // Change the scope if needed. If your content isn’t wrapped in .markdown-section on all pages,
-      // try using '#app' instead.
+      // Adjust the TOC scope if necessary. If your non-README pages don't use .markdown-section,
+      // consider using '#app' or the appropriate container.
       toc: {
         scope: '.markdown-section',
         headings: 'h2, h3',
@@ -223,25 +223,26 @@
       }
     };
 
-    // Re-run the TOC generation on each page change
+    // If needed, re-run the TOC generation on each page load
     window.$docsify.plugins.push((hook, vm) => {
-      hook.doneEach(function() {
+      hook.doneEach(() => {
         if (window.$docsify.toc) {
           window.$docsify.toc();
         }
-
-        // Add smooth scrolling for TOC links
-        document.querySelectorAll('.toc-content a').forEach(link => {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-              targetElement.scrollIntoView({ behavior: 'smooth' });
-            }
-          });
-        });
       });
+    });
+    
+    // Add a hashchange listener to smoothly scroll to the anchor element
+    window.addEventListener('hashchange', function() {
+      setTimeout(function() {
+        const id = location.hash.slice(1);
+        if (id) {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 300);
     });
   </script>
   
