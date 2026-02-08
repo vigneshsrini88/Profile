@@ -654,6 +654,7 @@
 
     .about-visual {
       position: relative;
+      padding: 25px;
     }
 
     .about-card {
@@ -716,34 +717,48 @@
     /* Floating badges around the card */
     .floating-badge {
       position: absolute;
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 10px 16px;
-      font-size: 0.8rem;
-      color: var(--text-light);
+      z-index: 10;
+      background: rgba(11, 13, 23, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      color: var(--accent-primary);
+      font-weight: 500;
       white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       animation: float-badge 6s ease-in-out infinite;
     }
 
+    .floating-badge i {
+      color: var(--accent-cyan);
+    }
+
+    /* Badge positions: 4 corners of the about-visual */
     .floating-badge:nth-child(2) {
-      top: -10px;
-      right: -20px;
+      top: 5px;
+      right: 0;
       animation-delay: 0s;
     }
 
     .floating-badge:nth-child(3) {
-      bottom: 40px;
-      left: -30px;
-      animation-delay: -2s;
+      top: 5px;
+      left: 0;
+      animation-delay: -1.5s;
     }
 
     .floating-badge:nth-child(4) {
-      bottom: -10px;
-      right: 40px;
-      animation-delay: -4s;
+      bottom: 5px;
+      right: 0;
+      animation-delay: -3s;
+    }
+
+    .floating-badge:nth-child(5) {
+      bottom: 5px;
+      left: 0;
+      animation-delay: -4.5s;
     }
 
     @keyframes float-badge {
@@ -1856,6 +1871,7 @@
           <div class="floating-badge"><i class="fas fa-code"></i>&nbsp; API Docs</div>
           <div class="floating-badge"><i class="fas fa-book"></i>&nbsp; 600+ Articles</div>
           <div class="floating-badge"><i class="fas fa-rocket"></i>&nbsp; SaaS Expert</div>
+          <div class="floating-badge"><i class="fas fa-brain"></i>&nbsp; AI Content Strategist</div>
         </div>
 
         <div class="about-text reveal reveal-delay-2">
