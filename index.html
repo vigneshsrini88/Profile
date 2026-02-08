@@ -728,19 +728,19 @@
       animation: float-badge 6s ease-in-out infinite;
     }
 
-    .floating-badge:nth-child(1) {
+    .floating-badge:nth-child(2) {
       top: -10px;
       right: -20px;
       animation-delay: 0s;
     }
 
-    .floating-badge:nth-child(2) {
+    .floating-badge:nth-child(3) {
       bottom: 40px;
       left: -30px;
       animation-delay: -2s;
     }
 
-    .floating-badge:nth-child(3) {
+    .floating-badge:nth-child(4) {
       bottom: -10px;
       right: 40px;
       animation-delay: -4s;
@@ -1851,11 +1851,11 @@
             <div class="about-card-location">
               <i class="fas fa-map-marker-alt"></i> Bengaluru, India
             </div>
-            <!-- Floating badges -->
-            <div class="floating-badge"><i class="fas fa-code"></i>&nbsp; API Docs</div>
-            <div class="floating-badge"><i class="fas fa-book"></i>&nbsp; 600+ Articles</div>
-            <div class="floating-badge"><i class="fas fa-rocket"></i>&nbsp; SaaS Expert</div>
           </div>
+          <!-- Floating badges (outside card to avoid overflow:hidden clipping) -->
+          <div class="floating-badge"><i class="fas fa-code"></i>&nbsp; API Docs</div>
+          <div class="floating-badge"><i class="fas fa-book"></i>&nbsp; 600+ Articles</div>
+          <div class="floating-badge"><i class="fas fa-rocket"></i>&nbsp; SaaS Expert</div>
         </div>
 
         <div class="about-text reveal reveal-delay-2">
