@@ -1,0 +1,44 @@
+/* ============================================
+   Vignesh Srinivasan Profile - Style Override
+   ============================================
+   Primary styles are embedded in index.html.
+   This file serves as an optional override layer.
+   ============================================ */
+
+/* Print Styles */
+@media print {
+  .nav,
+  .hero-bg-orb,
+  .hero-grid,
+  .scroll-indicator,
+  .floating-badge {
+    display: none !important;
+  }
+
+  .hero {
+    min-height: auto !important;
+    padding: 40px 0 !important;
+    background: white !important;
+  }
+
+  .hero-name,
+  .hero-title .typed-text {
+    color: #1e293b !important;
+    -webkit-text-fill-color: #1e293b !important;
+  }
+
+  .section-dark,
+  .section-dark-2,
+  .stats-section {
+    background: white !important;
+    color: #1e293b !important;
+  }
+
+  .section {
+    padding: 24px 0 !important;
+  }
+
+  body {
+    font-size: 12pt;
+  }
+}
