@@ -257,6 +257,119 @@
       max-width: 800px;
     }
 
+    /* Hero flex layout */
+    .hero .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    /* Profile Image */
+    .hero-profile {
+      flex-shrink: 0;
+      position: relative;
+      animation: profileFloat 6s ease-in-out infinite;
+    }
+
+    .hero-profile::before {
+      content: '';
+      position: absolute;
+      inset: -30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(6,182,212,0.15) 40%, transparent 70%);
+      filter: blur(20px);
+      z-index: 0;
+    }
+
+    .hero-profile-frame {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-profile-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      padding: 4px;
+      background: conic-gradient(from 0deg, #6366f1, #8b5cf6, #06b6d4, #ec4899, #6366f1);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: rotateBorder 4s linear infinite;
+    }
+
+    .hero-profile-img {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+      border: 4px solid rgba(11,13,23,0.9);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-profile-orbit {
+      position: absolute;
+      inset: -25px;
+      border-radius: 50%;
+      border: 1px dashed rgba(99,102,241,0.2);
+      animation: orbitSpin 15s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-profile-orbit span {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(99,102,241,0.6);
+    }
+
+    .hero-profile-orbit span:nth-child(1) {
+      top: 50%;
+      right: -5px;
+      transform: translateY(-50%);
+    }
+
+    .hero-profile-orbit span:nth-child(2) {
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .hero-profile-orbit span:nth-child(3) {
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes profileFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(1deg); }
+      66% { transform: translateY(-8px) rotate(-1deg); }
+    }
+
+    @keyframes rotateBorder {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes orbitSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -808,6 +921,7 @@
       position: relative;
       width: 50%;
       padding: 0 48px 64px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .timeline-item:nth-child(odd) {
@@ -847,6 +961,7 @@
       padding: 32px;
       transition: var(--transition);
       text-align: left;
+      cursor: pointer;
     }
 
     .timeline-card:hover {
@@ -1225,6 +1340,41 @@
         margin: 0 auto;
       }
 
+      .hero .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .hero-location {
+        justify-content: center;
+      }
+
+      .hero-socials {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .hero-profile-frame {
+        width: 280px;
+        height: 280px;
+      }
+
+      .hero-profile-img {
+        width: 260px;
+        height: 260px;
+      }
+
+      .hero-profile {
+        order: -1;
+      }
+
       .timeline::before {
         left: 20px;
       }
@@ -1278,6 +1428,20 @@
 
       .nav-mobile-toggle {
         display: block;
+      }
+
+      .hero-profile-frame {
+        width: 220px;
+        height: 220px;
+      }
+
+      .hero-profile-img {
+        width: 200px;
+        height: 200px;
+      }
+
+      .hero-profile-orbit {
+        inset: -15px;
       }
 
       .hero-stats {
@@ -1368,6 +1532,87 @@
       color: #f59e0b;
       margin-top: 2px;
       flex-shrink: 0;
+    }
+
+    /* Expandable Timeline Cards */
+    .timeline-card .timeline-list,
+    .timeline-card .timeline-subrole,
+    .timeline-card .timeline-achievement {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border: 0 !important;
+      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.4s ease 0.1s,
+                  margin 0.3s ease,
+                  padding 0.3s ease;
+    }
+
+    .timeline-card.expanded .timeline-list {
+      max-height: 3000px;
+      opacity: 1;
+      margin-top: 10px !important;
+      margin-bottom: 10px !important;
+    }
+
+    .timeline-card.expanded .timeline-subrole {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 16px !important;
+      margin-bottom: 10px !important;
+      padding-bottom: 6px !important;
+      border-bottom: 1px solid var(--border-light) !important;
+    }
+
+    .timeline-card.expanded .timeline-achievement {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 16px !important;
+      padding: 12px 16px !important;
+      border: 1px solid rgba(99,102,241,0.15) !important;
+    }
+
+    .timeline-card::after {
+      content: 'Click to read more  \25BC';
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(99,102,241,0.2);
+      font-size: 0.8rem;
+      color: var(--accent-primary);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+    }
+
+    .timeline-card:hover::after {
+      color: var(--accent-secondary);
+    }
+
+    .timeline-card.expanded::after {
+      content: 'Click to collapse  \25B2';
+    }
+
+    .timeline-item.item-expanded {
+      width: 100% !important;
+      left: 0 !important;
+      padding-left: 56px !important;
+      padding-right: 24px !important;
+      text-align: left !important;
+    }
+
+    .timeline-item.item-expanded .timeline-dot {
+      left: 20px !important;
+      right: auto !important;
+    }
+
+    .timeline-card.expanded {
+      box-shadow: 0 25px 60px rgba(99,102,241,0.12);
+      border-color: rgba(99,102,241,0.25);
     }
 
     /* ============================================
@@ -1563,6 +1808,18 @@
             <div class="hero-stat-number"><span>7</span></div>
             <div class="hero-stat-label">Awards Earned</div>
           </div>
+        </div>
+      </div>
+
+      <!-- Profile Image -->
+      <div class="hero-profile">
+        <div class="hero-profile-frame">
+          <img src="assests/images/profile.jpg" alt="Vignesh Srinivasan" class="hero-profile-img">
+        </div>
+        <div class="hero-profile-orbit">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
     </div>
@@ -2304,6 +2561,38 @@
       if (statsSection) {
         statsObserver.observe(statsSection);
       }
+    })();
+
+    // ---- Timeline Card Expand/Collapse ----
+    (function() {
+      const timelineCards = document.querySelectorAll('.timeline-card');
+
+      timelineCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+          const item = card.closest('.timeline-item');
+          const isExpanded = card.classList.contains('expanded');
+
+          // Collapse all other cards (accordion behavior)
+          timelineCards.forEach(function(otherCard) {
+            if (otherCard !== card) {
+              otherCard.classList.remove('expanded');
+              const otherItem = otherCard.closest('.timeline-item');
+              if (otherItem) otherItem.classList.remove('item-expanded');
+            }
+          });
+
+          // Toggle this card
+          card.classList.toggle('expanded');
+          if (item) item.classList.toggle('item-expanded');
+
+          // Smooth scroll into view when expanding
+          if (!isExpanded && item) {
+            setTimeout(function() {
+              item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 150);
+          }
+        });
+      });
     })();
 
     // ---- Active Nav Link Highlight ----
